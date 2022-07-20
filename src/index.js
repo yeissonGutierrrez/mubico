@@ -13,6 +13,7 @@ import points from './models/points/points.js'
 import orchids1 from './models/orchids1/Orchids1.js'
 import orchids2 from './models/orchids2/orchids2.js'
 import Stats from '../js/Stats.js';
+import pasillo from './models/pasillo/pasillo.js';
 
 scene.add( cube );
 scene.add( light );
@@ -35,6 +36,14 @@ camera.lookAt(cube.position)
 const raycaster = new THREE.Raycaster()
 let meshCurrentHover = null
 
+let fadeOut = (o) => {  
+    o.classList.add("fadeOut");
+        
+    if (document.querySelector('#myDiv')) {
+      setTimeout(d_none,600); 
+      // si existe el elemento #myDiv ejecuto la funcion una vez que pasen .6s que es lo que tarda en opacarse
+    }
+}
 
 scene.add(light)
 
@@ -46,7 +55,7 @@ garden.then((gltf) => {
     scene.add(gltf)
     console.log(gltf)
     camera.lookAt(new THREE.Vector3(200, 200, 200));
-    camera.position.set(34, -5, -28);
+    camera.position.set(0, 0, 0);
 
     const lights = ['PointLight_10', 'PointLight_8', 'PointLight_28', 'PointLight_30', 'PointLight_26', 'PointLight_24', 'PointLight_2', 'PointLight', 'PointLight_16', 'PointLight_18', 'PointLight_22', 'PointLight_20', 'PointLight_14', 'PointLight_12', 'PointLight_6', 'PointLight_4']
 
@@ -75,12 +84,12 @@ garden.then((gltf) => {
         pointLight.intensity = 5
         pointLight.distance = 5
         // currentLight.position.setY(currentLight.position.y + 6)
-        pointLight.position.set( currentLight.position.x + 34, currentLight.position.y - 2, currentLight.position.z - 28 );
+        pointLight.position.set( currentLight.position.x - 184, currentLight.position.y - 2, currentLight.position.z - 28 );
 
         const pointLightHelper = new THREE.PointLightHelper( pointLight, 1 );
 
         scene.add(pointLight)
-        // scene.add(pointLightHelper)
+        scene.add(pointLightHelper)
     })
 
           //trees section 1
@@ -180,7 +189,7 @@ garden.then((gltf) => {
     
                   let scale = Math.random() * 10
                   let planes = new THREE.Sprite( mat );
-                  planes.position.set(array[0] + 34, array[1] - 2, array[2] - 28)
+                  planes.position.set(array[0] - 184, array[1] - 2, array[2] - 28)
     
                   if (scale >= 8) {
                     planes.scale.x = 7
@@ -281,7 +290,7 @@ garden.then((gltf) => {
                     let scale = Math.random() * 10
                     
                     let planes = new THREE.Sprite( mat );
-                    planes.position.set(treesArray3[0] + 34, treesArray3[1] - 2, treesArray3[2] - 28)
+                    planes.position.set(treesArray3[0] - 184, treesArray3[1] - 2, treesArray3[2] - 28)
       
                     if (scale >= 8) {
                       planes.scale.x = 10
@@ -385,7 +394,7 @@ garden.then((gltf) => {
                     let scale = Math.random() * 10
                     
                     let planes = new THREE.Sprite( mat );
-                    planes.position.set(treesArray[0] + 34, treesArray[1] - 2, treesArray[2] - 28)
+                    planes.position.set(treesArray[0] - 184, treesArray[1] - 2, treesArray[2] - 28)
       
                     if (scale >= 8) {
                       planes.scale.x = 7
@@ -543,7 +552,7 @@ garden.then((gltf) => {
                     // planes2.scale.x = 1
                     // planes2.scale.y = 1
                     // planes2.lookAt(camera)
-                    planes2.position.set(palmsArray[0] + 34, palmsArray[1] -4, palmsArray[2] - 28)
+                    planes2.position.set(palmsArray[0] - 184, palmsArray[1] -4, palmsArray[2] - 28)
                     if (palms <= palmsGeo.attributes.position.array.length) {
                       palms++
                       if (palmsType <= 5) {
@@ -633,7 +642,7 @@ garden.then((gltf) => {
                       // planes2.position.setY(treesArray[1] - 4)
                     }
                     // planes2.lookAt(camera)
-                    planes2.position.set(palmsArray2[0] + 34, palmsArray2[1] - 4, palmsArray2[2] - 28)
+                    planes2.position.set(palmsArray2[0] - 184, palmsArray2[1] - 4, palmsArray2[2] - 28)
                     if (palms2 <= palmsGeo2.attributes.position.array.length) {
                       palms2++
                       if (palmsType2 <= 5) {
@@ -698,7 +707,7 @@ garden.then((gltf) => {
                     planes2.scale.x = 1.4
                     planes2.scale.y = 1.4
                     // planes2.lookAt(camera)
-                    planes2.position.set(palmsArray3[0] + 34, palmsArray3[1] -4, palmsArray3[2] - 28)
+                    planes2.position.set(palmsArray3[0] - 184, palmsArray3[1] -4, palmsArray3[2] - 28)
                     if (palms3 <= palmsGeo2.attributes.position.array.length) {
                       palms3++
                       if (palmsType3 <= 5) {
@@ -724,6 +733,10 @@ garden.then((gltf) => {
 
 
 points.then((gltf) => {
+    scene.add(gltf)
+  })
+  
+pasillo.then((gltf) => {
     scene.add(gltf)
 })
 
@@ -851,7 +864,7 @@ orchids2.then((gltf) => {
     
     
         timeline.to(orbitControls.target,{
-            x: point.geometry.attributes.position.array[0] + 34,
+            x: point.geometry.attributes.position.array[0] - 184,
             y: point.geometry.attributes.position.array[1] - 3.2,
             z: point.geometry.attributes.position.array[2] - 28,
         })
@@ -1020,9 +1033,27 @@ orchids2.then((gltf) => {
   
   let playButton = document.getElementById('playButton')
   playButton.style.display = 'block'
+
+  const timeline = new gsap.timeline({
+    defaults: {
+      duration: 10
+    }
+  })
   
   playButton.addEventListener('click', () => {
-    document.getElementById('loader').style.display = 'none'
+    
+    fadeOut(document.querySelector('#loader'))
+    setTimeout(() => {
+      document.getElementById('loader').style.display = 'none'
+    }, 2000);
+
+    timeline.to(orbitControls.target,{
+      x: -214,
+      y: 0,
+      z: 0,
+    })
+
+    // orbitControls.update()
   })
   console.log( 'Loading complete!');
 })

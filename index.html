@@ -54,7 +54,7 @@
         }
 
         #modal3d {
-            display: block;
+            display: none;
             /* background-color: rgb(51, 51, 51); */
             border: solid white 2px;
             padding: 30px;
@@ -69,6 +69,7 @@
             margin: auto; 
             animation: example; 
             animation-duration: 0.3s;
+            z-index: 3;
         }
         
         #modal h1 {
@@ -215,7 +216,7 @@
 </head>
 <body>
     <canvas id="c"></canvas>
-    <div id="box"></div>
+    <div data-diagram="box" id="box"></div>
 
     <div id="loader">
         <h2 id="loadText"></h2>
@@ -241,10 +242,12 @@
 
             <h3>LONGEVIDAD</h3>
             <p>Vive entre 3 a 7 años en interiores.</p>
+            
+            <button id="buttonModal3d">open 3d modal</button>
         </div>
     </div>
 
-    <!-- <canvas id="modal3d"></canvas> -->
+     <div data-diagram="modal3d" id="modal3d"></div> 
 
 </body>
 </html>

@@ -50,6 +50,7 @@
             margin: auto; 
             animation: example; 
             animation-duration: 0.3s;
+            z-index: 2;
         }
 
         #modal3d {
@@ -122,7 +123,8 @@
         }
 
         #loader {
-            position: fixed;
+            position: absolute;
+            top: 0;
             width: 100vw;
             height: 100vh;
             /* background-color: aliceblue; */
@@ -134,6 +136,7 @@
             justify-content: center;
             flex-direction: column;
             align-items: center;
+            z-index: 2;
         }
 
         .lds-dual-ring {
@@ -175,6 +178,25 @@
             animation-fill-mode: forwards;
         }
 
+        #box {
+            /* background-color: aqua; */
+             position: absolute; 
+             top: 0;
+            /* display: block; */
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+        }
+        #c {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            display: block;
+            z-index: -1;
+        }
+
         @keyframes out {
             from { opacity: 1;  }
             to { opacity: 0; }
@@ -192,6 +214,8 @@
     </style>
 </head>
 <body>
+    <canvas id="c"></canvas>
+    <div id="box"></div>
 
     <div id="loader">
         <h2 id="loadText"></h2>

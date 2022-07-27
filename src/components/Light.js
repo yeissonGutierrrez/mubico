@@ -1,4 +1,4 @@
-const light = new THREE.AmbientLight( 0x404040 ); // soft white light
+const light = new THREE.AmbientLight( 0xffffff, 0.2 ); // soft white light
 
 
 export default light

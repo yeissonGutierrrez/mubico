@@ -14,6 +14,7 @@
     <script src="js/HDRCubeTextureLoader.js" defer></script>
     <script src="js/DRACOLoader.js" defer></script>
     <script src="js/OrbitControls.js" defer></script>
+    <script src="js/TrackballControls.js" defer></script>
     <script src="src/index.js" type="module"></script>
     <!-- <script src="src/models/orquidsModal/orchidsModal.js" type="module"></script> -->
 
@@ -70,6 +71,8 @@
             animation: example; 
             animation-duration: 0.3s;
             z-index: 3;
+            overflow: hidden;
+            background-color: rgb(59, 59, 59);
         }
         
         #modal h1 {
@@ -247,7 +250,8 @@
         </div>
     </div>
 
-     <div data-diagram="modal3d" id="modal3d"></div> 
+     <div data-diagram="modal3d" id="modal3d">
+     </div> 
 
 </body>
 </html>

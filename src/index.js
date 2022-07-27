@@ -16,6 +16,7 @@ import orchids2 from './models/orchids2/orchids2.js'
 import Stats from '../js/Stats.js';
 import pasillo from './models/pasillo/pasillo.js';
 import makeScene from './components/makeScene.js';
+import orchidText from './models/orchidText/orchidText.js';
 
 
 
@@ -75,7 +76,6 @@ function principalScene (elem) {
         }
     }
     
-    sceneInfo.scene.add(light)
     
     raylAndWood.then((gltf) => {
       sceneInfo.scene.add(gltf)
@@ -1105,33 +1105,53 @@ function principalScene (elem) {
 }
 
 function secondaryScene(elem) {
+
+
   const fov = 45;
   const aspect = 2;  // the canvas default
   const near = 0.1;
-  const far = 5;
+  const far = 20;
   const camera3 = new THREE.PerspectiveCamera(fov, aspect, near, far);
-  camera3.position.set(0, 1, 2);
-  camera3.lookAt(0, 0, 0);
+  camera3.position.set(-5, 6, 0);
 
-    const sceneInfo = makeScene(elem, camera3);
+  const sceneInfo = makeScene(elem, camera3);
 
+  let pointLight = new THREE.PointLight( 0xffffff);
+  pointLight.intensity = 10
+  pointLight.distance = 10
+  // currentLight.position.setY(currentLight.position.y + 6)
+  pointLight.position.set(2,8,2);
 
-      // const controls = new THREE.TrackballControls(camera3, elem);
+  const pointLightHelper = new THREE.PointLightHelper( pointLight, 1 );
+  
+  sceneInfo.scene.add(pointLight)
+  // sceneInfo.scene.add(pointLightHelper)
+  
+  orchidText.then((gltf) => {
+    sceneInfo.scene.add(gltf)
+
+  })
+      const controls = new THREE.TrackballControls(camera3, document.getElementById('modal3d'));
       // controls.noZoom = true;
       // controls.noPan = true;
+      
+
       const radius = .8;
       const widthSegments = 4;
       const heightSegments = 2;
       const geometry = new THREE.SphereBufferGeometry(radius, widthSegments, heightSegments);
       const material = new THREE.MeshPhongMaterial({
         color: 'blue',
-        flatShading: true,
+        flatShading: false,
       });
       const mesh = new THREE.Mesh(geometry, material);
-      sceneInfo.scene.add(light)
-      sceneInfo.scene.add(mesh);
+      // sceneInfo.scene.add(light)
+      // sceneInfo.scene.add(mesh);
+
       return () => {
         renderer.render(sceneInfo.scene, sceneInfo.camera)
+        controls.handleResize();
+        controls.update();
       };
 }
 

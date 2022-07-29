@@ -1132,8 +1132,8 @@ function secondaryScene(elem) {
 
   })
       const controls = new THREE.TrackballControls(camera3, document.getElementById('modal3d'));
-      // controls.noZoom = true;
-      // controls.noPan = true;
+      controls.rotateSpeed = 0.5;
+      controls.noPan = true;
       
 
       const radius = .8;
@@ -1148,11 +1148,21 @@ function secondaryScene(elem) {
       // sceneInfo.scene.add(light)
       // sceneInfo.scene.add(mesh);
 
+      let modal = document.getElementById('modal3d')
+      let closeBotton = document.getElementById('modal3dClose')
+
+      closeBotton.addEventListener('click', () => {
+          // sceneInfo.scene.clear()
+          modal.style.display = 'none'
+      })
+
       return () => {
         renderer.render(sceneInfo.scene, sceneInfo.camera)
         controls.handleResize();
         controls.update();
       };
+
+
 }
 
 document.querySelectorAll('[data-diagram]').forEach((elem) => {

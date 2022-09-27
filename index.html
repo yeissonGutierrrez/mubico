@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mubico</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="js/three.js" defer></script>
+    <script src="js/Gsap.js" defer></script>
+    <script src="js/Stats.js" defer></script>
+    <script src="js/GLTFLoader.js" defer></script>
+    <script src="js/RGBELoader.js" defer></script>
+    <script src="js/HDRCubeTextureLoader.js" defer></script>
+    <script src="js/DRACOLoader.js" defer></script>
+    <script src="js/OrbitControls.js" defer></script>
+    <script src="js/TrackballControls.js" defer></script>
+    <script src="src/index.js" type="module"></script>
+    <!-- <script src="src/models/orquidsModal/orchidsModal.js" type="module"></script> -->
+
+    <style>
+
+        @font-face {
+            font-family: 'Flama-bold';
+            src: url(./src/fonts/Flama-Bold.otf);
+        }
+
+        @font-face {
+            font-family: 'Flama-book';
+            src: url(./src/fonts/Flama-Book.otf);
+        }
+
+        @keyframes example {
+            0% { transform: scale(0); opacity: 0;}
+            100% { transform: scale(1); opacity: 1;}
+        }
+
+        #modal {
+            display: none;
+            background-color: rgb(51, 51, 51);
+            border: solid white 2px;
+            padding: 30px;
+            border-radius: 50px;
+            color: white;
+            position: absolute; 
+            top: 10px; 
+            width: 470px; 
+            height: 350px; 
+            left: 0; right: 0; 
+            top: 0; bottom: 0; 
+            margin: auto; 
+            animation: example; 
+            animation-duration: 0.3s;
+            z-index: 2;
+        }
+
+        #modal3d {
+            display: none;
+            /* background-color: rgb(51, 51, 51); */
+            border: solid white 2px;
+            padding: 30px;
+            border-radius: 50px;
+            color: white;
+            position: absolute; 
+            top: 10px; 
+            width: 470px; 
+            height: 350px; 
+            left: 0; right: 0; 
+            top: 0; bottom: 0; 
+            margin: auto; 
+            animation: example; 
+            animation-duration: 0.3s;
+            z-index: 3;
+            overflow: hidden;
+            background-color: rgb(59, 59, 59);
+        }
+        
+        #modal h1 {
+            font-size: 27px;
+            font-family: 'Flama-book';
+            font-weight: 400;
+        }
+        
+        #modal .sec_1 {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            height: 100%;
+            width: 15%;
+        }
+        
+        #modal .sec_1 img{
+            max-width: 50px;
+        }
+        
+        #modal .sec_2 {
+            padding-left: 20px;
+            width: 85%;
+        }
+        
+        #modal h3 {
+            text-transform: uppercase;
+            font-family: 'Flama-bold';
+            font-size: 14px;
+            font-weight: 400;
+            margin-top: 20px;
+        }
+        
+        #modal p {
+            font-size: 14px;
+            font-family: 'Flama-book';
+            font-weight: 400;
+        }
+        
+        .customButton {
+            font-weight: 400;
+            border-radius: 80px;
+            background: linear-gradient(90deg, rgba(252, 147, 96, 1),rgba(40, 154, 180, 1));
+            padding: 5px 10px;
+            font-size: 20px;
+            border: none;
+            outline: none;
+            color: white;
+            margin: 20px 0;
+        }
+
+        #loader {
+            position: absolute;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            /* background-color: aliceblue; */
+            background-image: url('https://img.wallpapic.es/i6893-333-517/medium/madera-museo-cuadro-arte-fondo-de-pantalla.jpg');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .lds-dual-ring {
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+            margin: 30px;
+        }
+        .lds-dual-ring:after {
+            content: " ";
+            display: block;
+            width: 64px;
+            height: 64px;
+            margin: 8px;
+            border-radius: 50%;
+            border: 6px solid rgb(255, 255, 255);
+            border-color: rgb(255, 255, 255) transparent rgb(39, 105, 69) transparent;
+            animation: lds-dual-ring 1.2s linear infinite;
+        }
+
+        #loadText {
+            color: white;
+            font-family: 'Flama-bold';
+        }
+        
+        #playButton {
+            color: white;
+            font-family: 'Flama-bold';
+            display: none;
+            border-radius: 50%;
+            border: solid white 3px;
+            background-color: rgb(255, 255, 255,0.5);
+            height: 80px;
+            width: 80px;
+            margin: 30px;
+        }
+        .fadeOut {
+            animation: out .6s;
+            animation-fill-mode: forwards;
+        }
+
+        #box {
+            /* background-color: aqua; */
+             position: absolute; 
+             top: 0;
+            /* display: block; */
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+        }
+        #c {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            display: block;
+            z-index: -1;
+        }
+
+        #modal3dClose {
+            font-family: 'Flama-bold';
+            font-size: 30px;
+            float: right;
+            cursor: pointer;
+        }
+
+        @keyframes out {
+            from { opacity: 1;  }
+            to { opacity: 0; }
+        }
+
+        @keyframes lds-dual-ring {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <canvas id="c"></canvas>
+    <div data-diagram="box" id="box"></div>
+
+    <div id="loader">
+        <h2 id="loadText"></h2>
+        <button id="playButton">Play</button>
+        <div id="loadingCircle" class="lds-dual-ring"></div>
+    </div>
+    <div id="modal">
+        <div class="opacity"></div>
+        <div class="sec_1">
+            <img src="./src/images/mubicoLogo.png" alt="logo" srcset="">
+            <img src="./src//images/navigate_before.png" alt="before" id="close">
+        </div>
+        <div class="sec_2">
+            <h1>ORQUÍDEA ALEVILLA <br>
+                U ORQUÍDEA MARIPOSA.</h1>
+            <button class="customButton">PHALAENOPSIS, PHAL</button>
+
+            <h3>familia</h3>
+            <p>Orquidáceas (Orchidaceae)</p>
+
+            <h3>ORIGEN</h3>
+            <p>Asia, India hasta Filipinas, Indonesia y noroeste de Austra-lia, habitan en selvas húmedas y cálidas, normalmente cerca del agua.</p>
+
+            <h3>LONGEVIDAD</h3>
+            <p>Vive entre 3 a 7 años en interiores.</p>
+            
+            <button id="buttonModal3d">open 3d modal</button>
+        </div>
+    </div>
+
+     <div data-diagram="modal3d" id="modal3d">
+        <H1 id="modal3dClose">X</H1>
+     </div> 
+
+</body>
+</html>

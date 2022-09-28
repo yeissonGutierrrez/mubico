@@ -57,32 +57,32 @@ function addScene(elem, fn) {
 
 function putTreePos(treesGeo, treeJumper, sceneInfo) {
   let imgtree1 = document.createElement('img');
-  imgtree1.src = '/src/images/trees/Arbol-3.png'
+  imgtree1.src = '../src/images/trees/Arbol-3.png'
   let sprite1 = new THREE.Texture(imgtree1);
   sprite1.needsUpdate = true;
 
   let imgtree2 = document.createElement('img');
-  imgtree2.src = '/src/images/trees/Arbol-4.png'
+  imgtree2.src = '../src/images/trees/Arbol-4.png'
   let sprite2 = new THREE.Texture(imgtree2);
   sprite2.needsUpdate = true;
 
   let imgtree3 = document.createElement('img');
-  imgtree3.src = '/src/images/trees/Arbol-5.png'
+  imgtree3.src = '../src/images/trees/Arbol-5.png'
   let sprite3 = new THREE.Texture(imgtree3);
   sprite3.needsUpdate = true;
 
   let imgtree4 = document.createElement('img');
-  imgtree4.src = '/src/images/trees/Arbol-6.png'
+  imgtree4.src = '../src/images/trees/Arbol-6.png'
   let sprite4 = new THREE.Texture(imgtree4);
   sprite4.needsUpdate = true;
 
   let imgtree5 = document.createElement('img');
-  imgtree5.src = '/src/images/trees/Arbol-7.png'
+  imgtree5.src = '../src/images/trees/Arbol-7.png'
   let sprite5 = new THREE.Texture(imgtree5);
   sprite5.needsUpdate = true;
 
   let imgtree6 = document.createElement('img');
-  imgtree6.src = '/src/images/trees/Arbol-8.png'
+  imgtree6.src = '../src/images/trees/Arbol-8.png'
   let sprite6 = new THREE.Texture(imgtree6);
   sprite6.needsUpdate = true;
 

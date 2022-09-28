@@ -39,7 +39,7 @@ loader.setDRACOLoader( dracoLoader );
 
 
 let Orchids = new Promise((res, rej) => {
-  loader.load("src/models/Orchids/orchidsNew.gltf",
+  loader.load("src/models/orchids/orchidsNew.gltf",
     function (gltf) {
       gltf.scene.position.set(-184, -5, -28)
       res(gltf.scene);
